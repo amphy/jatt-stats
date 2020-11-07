@@ -24,7 +24,7 @@
 FROM node:alpine as builder
 COPY package.json package-lock.json ./
 
-RUN npm ci && mkdir /opt/app && mv ./node_modules /opt/app
+RUN npm install --silent && mkdir /opt/app && mv ./node_modules /opt/app
 WORKDIR /opt/app
 COPY . . 
 RUN yarn build
