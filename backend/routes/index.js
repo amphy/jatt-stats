@@ -1,9 +1,10 @@
 var express = require('express');
+const path = require('path');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.send("This is the index");
+  res.sendFile(path.resolve('../frontend/jatt-stats/build/index.html'));
 });
 
 module.exports = router;
