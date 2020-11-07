@@ -57,14 +57,20 @@ function App() {
     />);
   }, [handleAnswerSubmitted, questionId, question]);*/
 
-  return (<div>{(result !== '') ? <Result quizResult={result}/> : <Quiz 
+  return (<div>
+
+    <h1 className="text-2xl">J.A.T.T. Stats</h1>
+
+    {(result !== '') ? <Result quizResult={result}/> : <Quiz 
       questionId={questionId}
       question={question}
       questionTotal={quizQuestions.length}
       onAnswerChange={handleAnswerChange}
       onAnswerSubmitted={handleAnswerSubmitted}
       answer={answer}
-    />}</div>);
+    />}
+
+    </div>);
   //console.log("Result", result);
 
 }

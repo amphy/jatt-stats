@@ -7,4 +7,4 @@ To run the backend
 npm install
 DEBUG=backend:* npm start
 ```
-Should run on localhost:3000 by default
+Should run on localhost:3001 by default
