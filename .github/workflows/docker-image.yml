@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Backend Docker image
-      run: docker build backend/. --file Dockerfile --tag jattstats-backend:$(date +%s)
+      run: docker build . --file backend/Dockerfile --tag jattstats-backend:$(date +%s)
     - uses: actions/checkout@v2
     - name: Build the Frontend Docker image
-      run: docker build frontend/jatt-stats/. --file Dockerfile --tag jattstats-frontend:$(date +%s)
+      run: docker build . --file frontend/jatt-stats/Dockerfile --tag jattstats-frontend:$(date +%s)
