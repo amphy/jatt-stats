@@ -7,7 +7,11 @@ module.exports = {
     'public/**/*.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+	fontFamily: {
+		stencil: ["Allerta Stencil", "sans-serif"]
+	}
+    },
   },
   variants: {},
   plugins: [],

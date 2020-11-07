@@ -29,7 +29,7 @@ var QuestionSchema = new Schema({
 
 var AnswerSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  questionId: Number,
+  questionId: Schema.Types.ObjectId,
   answer: String
 });
 
@@ -38,11 +38,22 @@ router.get('/', function (req, res, next) {
   res.send('GET /question/:id\nPOST /question/:id/answer');
 });
 
+router.get('/question/', (req, res, next) => {
+  var Question = mongoose.model('Question', QuestionSchema);
+
+  // find question with this id, selecting the 'questionId' and 'content' fields
+  Question.find({}, '_id content', function (err, questions) {
+    if (err) return handleError(err);
+    res.send(questions);
+  });
+
+});
+
 router.get('/question/:id', (req, res, next) => {
   var Question = mongoose.model('Question', QuestionSchema);
 
   // find question with this id, selecting the 'questionId' and 'content' fields
-  Question.findOne({ 'questionId': req.params.id }, 'questionId content', function (err, questions) {
+  Question.findOne({ '_id': req.params.id }, 'questionId content', function (err, questions) {
     if (err) return handleError(err);
     res.send(questions);
   });
@@ -52,12 +63,14 @@ router.get('/question/:id', (req, res, next) => {
 router.post('/question/:id/answer', (req, res, next) => {
   let AnswerModel = mongoose.model('Answer', AnswerSchema);
   const answer = req.body.answer;
+  console.log("ANSWER", answer);
   if (!answer) {
     res.status(401);
     res.send("no answer provided")
   }
   AnswerModel.findOne({'questionId': req.params.id}, 'answer', function (err, answerRes) {
-    if (err) return handleError(err);
+    console.log(req.params.id);
+    if (err) return next(err); //res.status(err.code).json({ error: err.toString() });
     if (answer === String(answerRes.answer)) {
       res.send({
         correct: true,
