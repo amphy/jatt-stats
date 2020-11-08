@@ -112,14 +112,23 @@ function App() {
 
   return (
     <div className="bg-liquid-blue h-screen">
-      <div className="text-center">
+      {!showLanding && <div className="text-center">
         <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
-      </div>
-    <TransitionGroup unmountOnExit>
-    
-      {showLanding && <div className="flex justify-center">
-      <button className="bg-liquid-darkgold text-liquid-blue py-4 px-8 rounded" onClick={handleOnClick}>Click me</button>
       </div>}
+
+      {showLanding && <div className="h-screen bg-cover overflow-hidden" style={{backgroundImage: "linear-gradient(0deg, rgba(12, 34, 62, 0.8), rgba(12, 34, 62, 0.8)), url('https://i.ytimg.com/vi/iA0e_nWKjGM/maxresdefault.jpg')"}}>
+      <div className="flex flex-col justify-center md:py-12 py-2 text-center">
+      <div><h1 className="text-6xl text-gray-200 font-stencil pt-2 md:pt-12">J.A.T.T. STATS</h1></div>
+      <div><span className="italic text-xl text-liquid-darkgold font-stencil px-8">I am the Judgmental Automated Telemetry Testing unit.</span></div>
+      
+      <div className="flex flex-row items-start flex-wrap justify-center content-around w-screen">
+        <div><img className="md:max-w-l md:max-h-l max-h-md max-w-md" src={process.env.PUBLIC_URL + '/jatt.png'}/></div>
+        <div><button className="bg-liquid-darkgold text-liquid-blue py-4 px-8 md:mt-12 mb-2 rounded max-h-full max-w-md text-lg" onClick={handleOnClick}>Try Your Skills</button></div>
+      </div>
+      </div></div>}
+
+    <TransitionGroup unmountOnExit>
+      
 
       {(result !== '' && !showLanding) && <Result 
       quizResult={result} 
