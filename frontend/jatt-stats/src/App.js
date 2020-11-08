@@ -21,10 +21,10 @@ function App() {
 
   const fetchData = (async () => {
     const result = await axios({
-        url: '/stats/question',
-        method: 'get'
+      url: 'stats/question',
+      method: 'get'
     });
- 
+
     const sample = _.sampleSize(result.data, 2);
     setQuizQuestions(sample);
     setQuestionId(sample[0]._id);
@@ -73,27 +73,28 @@ function App() {
       // prints value from box, we need to verify this
       console.log(event.currentTarget.value);
       const submission = event.currentTarget.value; // needs to save the event info before its cleared
-      
+
       // async call to verify the answer
       (async () => {
         const result = await axios({
-          url: '/stats/question/' + questionId + '/answer',
+          url: 'stats/question/' + questionId + '/answer',
           method: 'post',
           data: {
             answer: submission
-          }});
-        
+          }
+        });
+
         addToCorrect(result.data.correct);
         const allCorrect = [...correct, result.data.correct];
         console.log("CORRECT", allCorrect);
 
-        if(counter + 1 < quizQuestions.length) {
+        if (counter + 1 < quizQuestions.length) {
           setTimeout(() => setNextQuestion(), 300);
         } else {
           const res = String(allCorrect.filter(Boolean).length) + " out of " + String(current);
           setTimeout(() => setResults(res), 300);
         }
-        
+
       })();
     }
   }, [questionId, counter, quizQuestions, current, correct]);
@@ -111,7 +112,6 @@ function App() {
 
   return (
     <div className="bg-liquid-blue h-screen">
-
     <div className="text-center">
       <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
     </div>
@@ -137,10 +137,6 @@ function App() {
         inProp={inProp}
         nodeRef={nodeRef}
       />}
-      </div>
-
-    </TransitionGroup>
-
     </div>);
 }
 
