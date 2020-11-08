@@ -107,45 +107,45 @@ function App() {
     setShowLanding(false);
   }, []);
 
-  const nodeRef= useRef(null);
+  const nodeRef = useRef(null);
   console.log(showLanding);
 
   return (
-    <div className="bg-liquid-blue h-screen overflow-hidden">
+    <div className="bg-gradient-to-b from-liquid-navy to-liquid-blue h-screen overflow-hidden">
       {!showLanding && <div className="text-center">
         <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
       </div>}
 
-      {showLanding && <div className="h-screen bg-cover md:overflow-hidden" style={{backgroundImage: "linear-gradient(0deg, rgba(12, 34, 62, 0.8), rgba(12, 34, 62, 0.8)), url('https://i.ytimg.com/vi/iA0e_nWKjGM/maxresdefault.jpg')"}}>
-      <div className="flex flex-col justify-center md:py-12 py-2 text-center">
-      <div><h1 className="text-6xl text-gray-200 font-stencil pt-2 md:pt-12">J.A.T.T. STATS</h1></div>
-      <div><span className="italic text-xl text-liquid-darkgold font-stencil px-8">I am the Judgmental Automated Telemetry Testing unit.</span></div>
-      
-      <div className="w-screen flex md:flex-row flex-col items-center flex-wrap-reverse justify-center max-w-full">
-        <div><img className="md:max-w-3xl md:max-h-3xl max-h-md max-w-md place-self-start flex-shrink" src={process.env.PUBLIC_URL + '/jatt.png'}/></div>
-        <div><button className="flex-shrink-0 bg-liquid-darkgold text-liquid-blue py-4 px-8 md:mt-12 mb-2 rounded max-h-full max-w-md text-lg hover:bg-liquid-white hover:text-liquid-navy" onClick={handleOnClick}>Try Your Skills</button></div>
-      </div>
-      </div></div>}
+      {showLanding && <div className="h-screen bg-cover md:overflow-hidden" style={{ backgroundImage: "linear-gradient(0deg, rgba(12, 34, 62, 0.8), rgba(12, 34, 62, 0.8)), url('https://i.ytimg.com/vi/iA0e_nWKjGM/maxresdefault.jpg')" }}>
+        <div className="flex flex-col justify-center md:py-12 py-2 text-center">
+          <div><h1 className="text-6xl text-gray-200 font-stencil pt-2 md:pt-12">J.A.T.T. STATS</h1></div>
+          <div><span className="italic text-xl text-liquid-darkgold font-stencil px-8">I am the Judgmental Automated Telemetry Testing unit.</span></div>
 
-    <TransitionGroup unmountOnExit>
-      
+          <div className="w-screen flex md:flex-row flex-col items-center flex-wrap-reverse justify-center max-w-full">
+            <div><img className="md:max-w-3xl md:max-h-3xl max-h-md max-w-md place-self-start flex-shrink" src={process.env.PUBLIC_URL + '/jatt.png'} /></div>
+            <div><button className="flex-shrink-0 bg-liquid-darkgold text-liquid-blue py-4 px-8 md:mt-12 mb-2 rounded max-h-full max-w-md text-lg hover:bg-liquid-white hover:text-liquid-navy" onClick={handleOnClick}>Try Your Skills</button></div>
+          </div>
+        </div></div>}
 
-      {(result !== '' && !showLanding) && <Result 
-      quizResult={result} 
-      onRestart={restartQuiz}
-      inProp={inProp}
-      nodeRef={nodeRef}/> }
+      <TransitionGroup unmountOnExit>
 
-      {(result === '' && !showLanding) && <Quiz 
-        questionId={current}
-        question={question}
-        questionTotal={quizQuestions.length}
-        onAnswerChange={handleAnswerChange}
-        onAnswerSubmitted={handleAnswerSubmitted}
-        answer={answer}
-        inProp={inProp}
-        nodeRef={nodeRef}
-      />}
+
+        {(result !== '' && !showLanding) && <Result
+          quizResult={result}
+          onRestart={restartQuiz}
+          inProp={inProp}
+          nodeRef={nodeRef} />}
+
+        {(result === '' && !showLanding) && <Quiz
+          questionId={current}
+          question={question}
+          questionTotal={quizQuestions.length}
+          onAnswerChange={handleAnswerChange}
+          onAnswerSubmitted={handleAnswerSubmitted}
+          answer={answer}
+          inProp={inProp}
+          nodeRef={nodeRef}
+        />}
       </TransitionGroup>
     </div>);
 }
