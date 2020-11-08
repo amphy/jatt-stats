@@ -18,6 +18,7 @@ RUN npm run build
 
 # run backend
 WORKDIR /app/backend
+RUN npm install --silent
 EXPOSE 3001
 
 # start app
