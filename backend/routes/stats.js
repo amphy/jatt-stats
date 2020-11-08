@@ -65,13 +65,13 @@ router.post('/question/:id/answer', (req, res, next) => {
   const answer = req.body.answer;
   console.log("ANSWER", answer);
   if (!answer) {
-    res.status(401);
-    res.send("no answer provided")
+    return res.status(401);
+    //res.send("no answer provided")
   }
   AnswerModel.findOne({'questionId': req.params.id}, 'answer', function (err, answerRes) {
     console.log(req.params.id);
     if (err) return next(err); //res.status(err.code).json({ error: err.toString() });
-    if (answer === String(answerRes.answer)) {
+    if (answer.toLowerCase() === String(answerRes.answer).toLowerCase()) {
       res.send({
         correct: true,
         answer: String(answerRes.answer),

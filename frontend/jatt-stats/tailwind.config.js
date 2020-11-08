@@ -8,9 +8,18 @@ module.exports = {
   ],
   theme: {
     extend: {
-	fontFamily: {
-		stencil: ["Allerta Stencil", "sans-serif"]
-	}
+      colors: {
+        liquid: {
+          navy: '#031422',
+          blue: '#0C223E',
+          white: '#FFFFFF',
+          darkgold: '#AD9742',
+          lightgold: '#C4BA40'
+        }
+      },
+    	fontFamily: {
+    		stencil: ["Allerta Stencil", "sans-serif"]
+    	}
     },
   },
   variants: {},

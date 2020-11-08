@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 import axios from 'axios';
 import _ from 'lodash';
-
-//import quizQuestions from './api/quizQuestions';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 function App() {
 
@@ -16,24 +15,40 @@ function App() {
   const [answer, setAnswer] = useState('');
   const [result, setResult] = useState('');
   const [quizQuestions, setQuizQuestions] = useState([]);
+  const [inProp, setInProp] = useState(false);
+
+  const fetchData = (async () => {
+    const result = await axios({
+        url: '/stats/question',
+        method: 'get'
+    });
+ 
+    const sample = _.sampleSize(result.data, 2);
+    setQuizQuestions(sample);
+    setQuestionId(sample[0]._id);
+    setQuestion(sample[0].content);
+    setInProp(true);
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios({
-          url: '/stats/question',
-          method: 'get'
-      });
-   
-      const sample = _.sampleSize(result.data, 1);
-      setQuizQuestions(sample);
-      setQuestionId(sample[0]._id);
-      setQuestion(sample[0].content);
-    };
+    fetchData();
+  }, []);
+
+  const restartQuiz = useCallback(() => {
+    setInProp(false);
+    setCounter(0);
+    setCurrent(1);
+    setCorrect([]);
+    setResult('');
+    setAnswer('');
+    setQuestion('');
     fetchData();
   }, []);
 
   const handleAnswerSubmitted = useCallback((event) => {
     if (event.keyCode === 13) {
+      setInProp(true);
+
       const setNextQuestion = (() => {
         const newCounter = counter + 1;
         setCounter(newCounter);
@@ -85,40 +100,37 @@ function App() {
     setAnswer(event.target.value);
   }, [])
 
-  /*const renderResult = useCallback(() => {
-    return ;
-  }, [result]);
-
-  const renderQuiz = useCallback(() => {
-    return (<Quiz 
-      questionId={questionId}
-      question={question}
-      questionTotal={quizQuestions.length}
-      onAnswerSubmitted={handleAnswerSubmitted}
-    />);
-  }, [handleAnswerSubmitted, questionId, question]);*/
+  const nodeRef= useRef(null);
 
   return (
-    <div className="bg-blue-800 h-screen">
+    <div className="bg-liquid-blue h-screen">
 
     <div className="text-center">
-      <h1 className="text-6xl text-gray-300 font-stencil pt-12">J.A.T.T. Stats</h1>
+      <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
     </div>
-
-    <div>
-      {(result !== '') ? <Result quizResult={result}/> : <Quiz 
+    <TransitionGroup>
+    
+      <div>
+      {(result !== '') ? <Result 
+      quizResult={result} 
+      onRestart={restartQuiz}
+      inProp={inProp}
+      nodeRef={nodeRef}/> 
+      : <Quiz 
         questionId={current}
         question={question}
         questionTotal={quizQuestions.length}
         onAnswerChange={handleAnswerChange}
         onAnswerSubmitted={handleAnswerSubmitted}
         answer={answer}
+        inProp={inProp}
+        nodeRef={nodeRef}
       />}
-    </div>
+      </div>
+
+    </TransitionGroup>
 
     </div>);
-  //console.log("Result", result);
-
 }
 
 export default App;

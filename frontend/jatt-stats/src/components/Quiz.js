@@ -1,30 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
 
 // Component imports
 import Question from './Question';
 import QuestionCount from './QuestionCount';
 import Answer from './Answer';
 
+
 function Quiz(props) {
 	return (
-		<div className="flex flex-row justify-around">
+		<CSSTransition nodeRef={props.nodeRef} key={props.questionId} in={props.inProp} timeout={200} classNames="question">
+		<div ref={props.nodeRef} className="flex flex-row justify-around items-center flex-wrap transition-opacity duration-1000 ease-in-out">
 			<div className="flex flex-col max-w-lg p-12">
-				<div className="text-2xl text-gray-300">
+				<div className="text-2xl text-liquid-white">
 					<QuestionCount
 						counter={props.questionId}
 						total={props.questionTotal}
 						/>
+
+					{props.hi}
 				</div>
 
-				<div className="text-4xl text-gray-300">
+				<div className="text-4xl text-gray-200">
 					<Question content={props.question}/>
 				</div>
 			</div>
-	      	<div className="content-center">
+	      	<div>
 	      		<Answer value={props.answer} onAnswerChange={props.onAnswerChange} onAnswerSubmitted={props.onAnswerSubmitted}/>
 	      	</div>
-      	</div>
+      	</div>   
+      	</CSSTransition>
       );
 }
 
@@ -34,7 +40,7 @@ Quiz.propTypes = {
 	question: PropTypes.string.isRequired,
 	onAnswerChange: PropTypes.func.isRequired,
 	onAnswerSubmitted: PropTypes.func.isRequired,
-	answer: PropTypes.string.isRequired
+	answer: PropTypes.string.isRequired,
 }
 
 export default Quiz;
