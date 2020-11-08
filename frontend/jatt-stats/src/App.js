@@ -112,12 +112,11 @@ function App() {
 
   return (
     <div className="bg-liquid-blue h-screen">
-    <div className="text-center">
-      <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
-    </div>
+      <div className="text-center">
+        <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
+      </div>
     <TransitionGroup unmountOnExit>
     
-      <div>
       {showLanding && <div className="flex justify-center">
       <button className="bg-liquid-darkgold text-liquid-blue py-4 px-8 rounded" onClick={handleOnClick}>Click me</button>
       </div>}
@@ -127,7 +126,8 @@ function App() {
       onRestart={restartQuiz}
       inProp={inProp}
       nodeRef={nodeRef}/> }
-      {(result === '' && !showLanding) &&<Quiz 
+
+      {(result === '' && !showLanding) && <Quiz 
         questionId={current}
         question={question}
         questionTotal={quizQuestions.length}
@@ -137,6 +137,7 @@ function App() {
         inProp={inProp}
         nodeRef={nodeRef}
       />}
+      </TransitionGroup>
     </div>);
 }
 
