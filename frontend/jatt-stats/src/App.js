@@ -75,7 +75,7 @@ function App() {
       // async call to verify the answer
       (async () => {
         const result = await axios({
-          url: '/stats/question/' + questionId + '/answer',
+          url: 'stats/question/' + questionId + '/answer',
           method: 'post',
           data: {
             answer: submission

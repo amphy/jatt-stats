@@ -7,7 +7,7 @@ import axios from 'axios';
 
 ;(async () => {
   const response = await axios({
-	url: '/stats/question',
+	url: 'stats/question',
 	method: 'get'
   });
 
