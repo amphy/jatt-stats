@@ -108,7 +108,7 @@ function App() {
     <div className="text-center">
       <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
     </div>
-    <TransitionGroup>
+    <TransitionGroup unmountOnExit>
     
       <div>
       {(result !== '') ? <Result 

@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
 function Result(props) {
+	const score = parseInt(props.quizResult.charAt(0));
+
 	return (
-		<CSSTransition nodeRef={props.nodeRef} in={props.inProp} timeout={200} classNames="question">
+		<CSSTransition nodeRef={props.nodeRef} in={props.inProp} timeout={200} classNames="question" unmountOnExit>
 		<div ref={props.nodeRef} className="flex flex-col text-center text-3xl text-gray-300 transition-opacity duration-1000 ease-in-out">
+			<div className="flex justify-center pt-12">
+				{score < 4 && <img src={process.env.PUBLIC_URL + '/tense_blue.png'} />}
+				{(score >= 4 && score <= 7) && <img src={process.env.PUBLIC_URL + '/tense_blue.png'} />}
+				{score > 7 && <img src={process.env.PUBLIC_URL + '/tense_blue.png'} />}
+			</div>
 			<div>
 				You scored {props.quizResult}
 			</div>
