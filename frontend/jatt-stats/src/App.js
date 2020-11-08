@@ -25,7 +25,7 @@ function App() {
       method: 'get'
     });
 
-    const sample = _.sampleSize(result.data, 2);
+    const sample = _.sampleSize(result.data, 10);
     setQuizQuestions(sample);
     setQuestionId(sample[0]._id);
     setQuestion(sample[0].content);
@@ -91,8 +91,8 @@ function App() {
         if (counter + 1 < quizQuestions.length) {
           setTimeout(() => setNextQuestion(), 300);
         } else {
-          const res = String(allCorrect.filter(Boolean).length) + " out of " + String(current);
-          setTimeout(() => setResults(res), 300);
+          //const res = String(allCorrect.filter(Boolean).length) + " out of " + String(current);
+          setTimeout(() => setResults(allCorrect.filter(Boolean).length), 300);
         }
 
       })();
@@ -132,6 +132,7 @@ function App() {
 
         {result !== '' ? <Result
           quizResult={result}
+          questionTotal={quizQuestions.length}
           onRestart={restartQuiz}
           inProp={inProp}
           nodeRef={nodeRef} /> :
