@@ -7,8 +7,8 @@ import axios from 'axios';
 
 ;(async () => {
   const response = await axios({
-    url: '/stats/question',
-    method: 'get'
+	url: '/stats/question',
+	method: 'get'
   });
 
   console.log(response.data);
@@ -21,23 +21,23 @@ import axios from 'axios';
 async function getQuizQuestions() {
 	return new Promise((resolve, reject) => {
 		axios({
-		    url: '/stats/question',
-		    method: 'get'
-	  	}).then((response, error) => {
-	  		if (!error && response.status === 200) {
-		  		console.log(response.data);
-		  		resolve(response.data);
-		  	} else {
-		  		reject(new Error("getQuizQuestions call failed"));
-		  	}
-	  	});
+			url: 'stats/question',
+			method: 'get'
+		}).then((response, error) => {
+			if (!error && response.status === 200) {
+				console.log(response.data);
+				resolve(response.data);
+			} else {
+				reject(new Error("getQuizQuestions call failed"));
+			}
+		});
 
 		/*if (!error && response.status === 200) {
-	  		console.log(response.data);
-	  		resolve(response.data);
-	  	} else {
-	  		reject(new Error("getQuizQuestions call failed"));
-	  	}*/
+				console.log(response.data);
+				resolve(response.data);
+			} else {
+				reject(new Error("getQuizQuestions call failed"));
+			}*/
 	});
 }
 
