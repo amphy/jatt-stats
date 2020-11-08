@@ -12,3 +12,6 @@ DEBUG=backend:* npm start
 ```
 
 Should run on localhost:3001 by default
+
+## Docker
+TBD
