@@ -111,7 +111,7 @@ function App() {
   console.log(showLanding);
 
   return (
-    <div className="bg-liquid-blue h-screen">
+    <div className="bg-liquid-blue h-screen overflow-hidden">
       {!showLanding && <div className="text-center">
         <h1 className="text-6xl text-gray-200 font-stencil pt-12">J.A.T.T. STATS</h1>
       </div>}
