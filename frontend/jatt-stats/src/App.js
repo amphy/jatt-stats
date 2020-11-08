@@ -7,6 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 function App() {
 
+  // set up state
   const [counter, setCounter] = useState(0);
   const [current, setCurrent] = useState(1);
   const [correct, setCorrect] = useState([]);
@@ -16,6 +17,7 @@ function App() {
   const [result, setResult] = useState('');
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [inProp, setInProp] = useState(false);
+  const [showLanding, setShowLanding] = useState(true);
 
   const fetchData = (async () => {
     const result = await axios({
@@ -98,9 +100,14 @@ function App() {
 
   const handleAnswerChange = useCallback((event) => {
     setAnswer(event.target.value);
-  }, [])
+  }, []);
+
+  const handleOnClick = useCallback(() => {
+    setShowLanding(false);
+  }, []);
 
   const nodeRef= useRef(null);
+  console.log(showLanding);
 
   return (
     <div className="bg-liquid-blue h-screen">
@@ -111,12 +118,16 @@ function App() {
     <TransitionGroup unmountOnExit>
     
       <div>
-      {(result !== '') ? <Result 
+      {showLanding && <div className="flex justify-center">
+      <button className="bg-liquid-darkgold text-liquid-blue py-4 px-8 rounded" onClick={handleOnClick}>Click me</button>
+      </div>}
+
+      {(result !== '' && !showLanding) && <Result 
       quizResult={result} 
       onRestart={restartQuiz}
       inProp={inProp}
-      nodeRef={nodeRef}/> 
-      : <Quiz 
+      nodeRef={nodeRef}/> }
+      {(result === '' && !showLanding) &&<Quiz 
         questionId={current}
         question={question}
         questionTotal={quizQuestions.length}
