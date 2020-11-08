@@ -108,7 +108,8 @@ function App() {
   }, []);
 
   const nodeRef = useRef(null);
-  console.log(showLanding);
+  console.log("RESULT", result, showLanding);
+  console.log((result === '' && !showLanding));
 
   return (
     <div className="bg-gradient-to-b from-liquid-navy to-liquid-blue h-screen overflow-hidden">
@@ -127,16 +128,16 @@ function App() {
           </div>
         </div></div>}
 
-      <TransitionGroup unmountOnExit>
+      <TransitionGroup>
 
-
-        {(result !== '' && !showLanding) && <Result
+        {result !== '' ? <Result
           quizResult={result}
           onRestart={restartQuiz}
           inProp={inProp}
-          nodeRef={nodeRef} />}
+          nodeRef={nodeRef} /> :
 
-        {(result === '' && !showLanding) && <Quiz
+        //{(result === '' && !showLanding) ? 
+        <Quiz
           questionId={current}
           question={question}
           questionTotal={quizQuestions.length}

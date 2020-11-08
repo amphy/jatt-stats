@@ -10,7 +10,7 @@ import Answer from './Answer';
 
 function Quiz(props) {
 	return (
-		<CSSTransition nodeRef={props.nodeRef} key={props.questionId} in={props.inProp} timeout={200} classNames="question" unmountOnExit>
+		<CSSTransition nodeRef={props.nodeRef} key={props.questionId} in={props.inProp} timeout={200} classNames="question">
 		<div ref={props.nodeRef} className="flex flex-row justify-around items-start flex-wrap transition-opacity duration-1000 ease-in-out">
 			<div className="flex flex-col max-w-lg p-12">
 				<div className="md:text-2xl text-lg text-liquid-white">
